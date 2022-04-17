@@ -82,7 +82,7 @@ patterns = [{"label": "DRUG", "pattern": "prednsone"},
 ruler.add_patterns(patterns)
 ```
 
-Load the model, run each entry in the data through the model, and store the results in the dictionary created above. Each result will be placed as a value with its corresponding key (label). A time function is used to view basic computational requirements.
+Load the model, run each entry in the data through the model, and store the results in the dictionary created above. Each result will be placed as a value with its corresponding key (label). A time function is used to view basic computational requirements. Based on the results, it can be seen that the model works in identifying data within EHRs and placing them underneath a label. There are certainly data instances in which the label does not match, but evaluation metrics will be evaluated later on (when annotated data is obtained).
 ```
 %%time
 med7 = spacy.load("en_core_med7_lg")

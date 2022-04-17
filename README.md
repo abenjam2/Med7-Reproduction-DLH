@@ -39,7 +39,7 @@ for i in keyList:
     d[i] = []
 ```
 
-Although the model is pretrained, additional training via entity_ruler is done.
+Although the model is pretrained, additional training via entity_ruler is done. Additional training will be done once access to an additional dataset is granted (https://n2c2.dbmi.hms.harvard.edu/data-sets). This dataset will be split into 2 portions, one to train the model further, and another to test the accuracy of the model.
 ```
 ruler = med7.add_pipe("entity_ruler")
 patterns = [{"label": "DRUG", "pattern": "prednsone"},
@@ -90,4 +90,22 @@ for entry in discharge_notes:
     doc = med7(str(entry))
     [d[ent.label_].append(ent.text) for ent in doc.ents]
 d
+```
+
+The below code will be used to obtain evaluation metrics for the model. As the above additional dataset is already annotated, that will be used to evaluate the accuracy as well. [This code is based off of a post in StackOverflow](https://stackoverflow.com/questions/44827930/evaluation-in-a-spacy-ner-model).
+```
+def evaluate(ner_model, examples):
+    scorer = Scorer()
+    example = []
+    for input_, annot in examples:
+        pred = ner_model(input_)
+        print(pred,annot)
+        temp = Example.from_dict(pred, dict.fromkeys(annot))
+        example.append(temp)
+    scores = scorer.score(example)
+    return scores
+
+ner_model = spacy.load('en_core_med7_lg') # for spaCy's pretrained use 'en_core_web_sm'
+results = evaluate(ner_model, examples)
+print(results)
 ```

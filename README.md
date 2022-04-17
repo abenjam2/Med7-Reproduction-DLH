@@ -17,19 +17,30 @@ pip install https://huggingface.co/kormilitzin/en_core_med7_lg/resolve/main/en_c
 # Code
 Although the model is pretrained, the below code was used to further train the model, prepare the data for the model, and run the data through the model. The data running through the model should be text data. 
 
+Import spaCY and the other necessary libraries.
+```
 import spacy
 from spacy.scorer import Scorer
 from spacy.training import Example
 import pandas as pd
+```
 
+Prepare the data. Read the data from the file and extract the data that will be run through the model.
+```
 data = pd.read_csv('NOTEEVENTS.csv',nrows=1000)
 discharge_notes = data.iloc[: , -1]
+```
 
+Create a dictionary with the labels as the keys. This is where the results from the model will be stored.
+```
 keyList = ["DOSAGE", "DRUG", "DURATION", "FORM", "FREQUENCY", "ROUTE", "STRENGTH"]
 d = {}
 for i in keyList:
     d[i] = []
-    
+```
+
+Although the model is pretrained, additional training via entity_ruler is done.
+```
 ruler = med7.add_pipe("entity_ruler")
 patterns = [{"label": "DRUG", "pattern": "prednsone"},
             {"label": "DRUG", "pattern": "aspirin"},
@@ -69,11 +80,14 @@ patterns = [{"label": "DRUG", "pattern": "prednsone"},
             {"label": "FREQUENCY", "pattern": "hs"},
             {"label": "FREQUENCY", "pattern": "every six (6) hours as needed"},]
 ruler.add_patterns(patterns)
+```
 
+Load the model, run each entry in the data through the model, and store the results in the dictionary created above. Each result will be placed as a value with its corresponding key (label). A time function is used to view basic computational requirements.
+```
 %%time
 med7 = spacy.load("en_core_med7_lg")
 for entry in discharge_notes:
     doc = med7(str(entry))
     [d[ent.label_].append(ent.text) for ent in doc.ents]
-
 d
+```

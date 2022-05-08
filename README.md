@@ -109,3 +109,16 @@ ner_model = spacy.load('en_core_med7_lg') # for spaCy's pretrained use 'en_core_
 results = evaluate(ner_model, examples)
 print(results)
 ```
+
+## Results
+
+Our model(s) achieves the following performance on:
+
+### [Test Set]()
+
+| Model name         | Pretrained Model  | With Additional n2c2 Training |
+| ------------------ |------------------ | ---------------- |
+| Strict F1 Score    |     0.000         |      0.000       |
+| ------------------ |------------------ | ---------------- |
+| Lenient F1 Score   |     0.000         |      0.000       |
+

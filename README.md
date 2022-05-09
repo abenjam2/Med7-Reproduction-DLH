@@ -1,9 +1,9 @@
 # Med7-Reproduction-DLH
-This is the repository is an official implementation of [Med7: a transferable clinical natural language processing model for electronic health records](https://www.sciencedirect.com/science/article/pii/S0933365721000798).
+This repository is an attempt of an implementation of [Med7: a transferable clinical natural language processing model for electronic health records](https://www.sciencedirect.com/science/article/pii/S0933365721000798).
 
-The data used for this project was obtained from the Medical Information Mart for Intensive Care (MIMIC-III) dataset. More specifically, discharge letters in the Notes Events file within MIMIC-III. Additionally, Track 2 of the 2018 National NLP Clinical Challenges (n2c2) Shared Task on drug related concepts extraction was used to further train the data as well as test the model.
+The data used for this project was obtained from the Medical Information Mart for Intensive Care (MIMIC-III) dataset. More specifically, discharge letters in the Notes Events file within MIMIC-III. Additionally, Track 2 of the 2018 National NLP Clinical Challenges (n2c2) Shared Task on drug related concepts extraction was used to further train the data as well as test the model. We received permission to download and use both of these datasets in our research.
 
-The goal of the original paper is to create a Named-Entity Recognition Model (NER) to extract useful data from Electronic Health Records (EHRs) using Natural Language Processing (NLP). Using spaCY version 3.2.4 and Python 3.7, we were able to run MIMIC-III data through the Med7 vectors model. The model was able to identify Dosage, Drug, Duration, Form, Frequency, Route, and Strength from the unstructured data of EHRs.
+The goal of the original paper is to create a Named-Entity Recognition Model (NER) to extract and annotate useful data from Electronic Health Records (EHRs) using Natural Language Processing (NLP). Normally, sensitive data like this cannot be annotated using crowdsourcing, like ImageNet, due to the highly private nature of such data. Using spaCY version 3.2.4 and Python 3.7, we were able to run MIMIC-III data through the Med7 vectors model. The model was able to identify Dosage, Drug, Duration, Form, Frequency, Route, and Strength from the unstructured data of ICU discharge notes and clinical notes EHRs.
 
 # Setup
 Before running the Med7 model, the following steps had to be implemented:
@@ -148,7 +148,7 @@ correct/len(test_patterns)
 The Pre-Trained Med7 model can be downloaded [here](https://huggingface.co/kormilitzin/en_core_med7_lg/resolve/main/en_core_med7_lg-any-py3-none-any.whl). This model was trained on the MIMIC-III dataset describing discharge notes from the ICU.
 
 # Results
-Our recreation was able to acheive the below Strict and Lenient F-1 Scores. Our Lenient F-1 Score has exceeded that of the original authors. However, our Strict F-1 Score did not reach that of the original authors.
+Our reproduction was able to acheive the below Strict and Lenient F-1 Scores. Our Lenient F-1 Score has exceeded that of the original authors. However, our Strict F-1 Score did not reach that of the original authors.
 
 ![image](https://github.com/abenjam2/Med7-Reproduction-DLH/blob/main/Screen%20Shot%202022-05-08%20at%209.19.36%20PM.png)
 

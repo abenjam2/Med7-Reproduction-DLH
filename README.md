@@ -150,7 +150,4 @@ The Pre-Trained Med7 model can be downloaded [here](https://huggingface.co/kormi
 # Results
 Our recreation was able to acheive the below Strict and Lenient F-1 Scores. Our Lenient F-1 Score has exceeded that of the original authors. However, our Strict F-1 Score did not reach that of the original authors.
 
- 
-# Contributing
-Additional contributions can be made 
 
